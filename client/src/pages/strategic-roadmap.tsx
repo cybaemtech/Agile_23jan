@@ -36,16 +36,16 @@ const defaultTemplates: Template[] = [
     description: 'Core product streams for feature planning',
     streams: ['Growth', 'Retention', 'Platform', 'Infrastructure', 'Experience'],
     projects: [
-      { id: 101, name: 'User Onboarding v2', startDate: '2025-01', endDate: '2025-03', stream: 'Growth', actionPoints: ['Redesign signup flow', 'Add social login', 'Create tutorial videos'] },
-      { id: 102, name: 'Analytics Dashboard', startDate: '2025-02', endDate: '2025-05', stream: 'Platform', actionPoints: ['Define key metrics', 'Build data pipeline', 'Design UI mockups'] },
-      { id: 103, name: 'Mobile App MVP', startDate: '2025-03', endDate: '2025-07', stream: 'Growth', actionPoints: ['iOS development', 'Android development', 'App store optimization'] },
-      { id: 104, name: 'Customer Success Portal', startDate: '2025-04', endDate: '2025-06', stream: 'Retention', actionPoints: ['Self-service knowledge base', 'Ticket system', 'Live chat integration'] },
-      { id: 105, name: 'Infrastructure Upgrade', startDate: '2025-06', endDate: '2025-09', stream: 'Infrastructure', actionPoints: ['Migrate to cloud', 'Implement CI/CD', 'Security audit'] },
-      { id: 106, name: 'Referral Program', startDate: '2025-08', endDate: '2025-10', stream: 'Growth', actionPoints: ['Design reward structure', 'Build tracking system', 'Marketing campaign'] },
-      { id: 107, name: 'Advanced Reporting', startDate: '2025-09', endDate: '2025-12', stream: 'Platform', actionPoints: ['Custom report builder', 'Data export features', 'Scheduled reports'] },
-      { id: 108, name: 'Personalization Engine', startDate: '2025-10', endDate: '2026-01', stream: 'Experience', actionPoints: ['User behavior tracking', 'ML recommendation model', 'A/B testing framework'] },
-      { id: 109, name: 'Enterprise SSO', startDate: '2026-01', endDate: '2026-03', stream: 'Platform', actionPoints: ['SAML implementation', 'OAuth support', 'Admin controls'] },
-      { id: 110, name: 'Loyalty Program v2', startDate: '2026-02', endDate: '2026-05', stream: 'Retention', actionPoints: ['Tiered membership', 'Points engine', 'Rewards marketplace'] },
+      { id: 101, name: 'User Onboarding v2', startDate: '2025-01-15', endDate: '2025-03-20', stream: 'Growth', actionPoints: ['Redesign signup flow', 'Add social login', 'Create tutorial videos'] },
+      { id: 102, name: 'Analytics Dashboard', startDate: '2025-02-10', endDate: '2025-05-15', stream: 'Platform', actionPoints: ['Define key metrics', 'Build data pipeline', 'Design UI mockups'] },
+      { id: 103, name: 'Mobile App MVP', startDate: '2025-03-01', endDate: '2025-07-30', stream: 'Growth', actionPoints: ['iOS development', 'Android development', 'App store optimization'] },
+      { id: 104, name: 'Customer Success Portal', startDate: '2025-04-05', endDate: '2025-06-25', stream: 'Retention', actionPoints: ['Self-service knowledge base', 'Ticket system', 'Live chat integration'] },
+      { id: 105, name: 'Infrastructure Upgrade', startDate: '2025-06-01', endDate: '2025-09-15', stream: 'Infrastructure', actionPoints: ['Migrate to cloud', 'Implement CI/CD', 'Security audit'] },
+      { id: 106, name: 'Referral Program', startDate: '2025-08-10', endDate: '2025-10-20', stream: 'Growth', actionPoints: ['Design reward structure', 'Build tracking system', 'Marketing campaign'] },
+      { id: 107, name: 'Advanced Reporting', startDate: '2025-09-01', endDate: '2025-12-15', stream: 'Platform', actionPoints: ['Custom report builder', 'Data export features', 'Scheduled reports'] },
+      { id: 108, name: 'Personalization Engine', startDate: '2025-10-05', endDate: '2026-01-20', stream: 'Experience', actionPoints: ['User behavior tracking', 'ML recommendation model', 'A/B testing framework'] },
+      { id: 109, name: 'Enterprise SSO', startDate: '2026-01-10', endDate: '2026-03-25', stream: 'Platform', actionPoints: ['SAML implementation', 'OAuth support', 'Admin controls'] },
+      { id: 110, name: 'Loyalty Program v2', startDate: '2026-02-01', endDate: '2026-05-15', stream: 'Retention', actionPoints: ['Tiered membership', 'Points engine', 'Rewards marketplace'] },
     ]
   },
   {
@@ -54,14 +54,14 @@ const defaultTemplates: Template[] = [
     description: 'Marketing channels and campaign planning',
     streams: ['SEO', 'Paid Ads', 'Social Media', 'Email Marketing', 'Content'],
     projects: [
-      { id: 201, name: 'SEO Audit & Revamp', startDate: '2025-01', endDate: '2025-03', stream: 'SEO', actionPoints: ['Keyword research', 'On-page optimization', 'Backlink strategy'] },
-      { id: 202, name: 'Google Ads Launch', startDate: '2025-02', endDate: '2025-04', stream: 'Paid Ads', actionPoints: ['Campaign setup', 'Ad copy creation', 'Budget allocation'] },
-      { id: 203, name: 'Instagram Growth', startDate: '2025-03', endDate: '2025-06', stream: 'Social Media', actionPoints: ['Content calendar', 'Influencer outreach', 'Reels strategy'] },
-      { id: 204, name: 'Newsletter Relaunch', startDate: '2025-04', endDate: '2025-05', stream: 'Email Marketing', actionPoints: ['Template redesign', 'Segmentation setup', 'A/B subject lines'] },
-      { id: 205, name: 'Blog Content Hub', startDate: '2025-05', endDate: '2025-09', stream: 'Content', actionPoints: ['Editorial calendar', '10 pillar articles', 'Guest post outreach'] },
-      { id: 206, name: 'YouTube Channel', startDate: '2025-07', endDate: '2025-12', stream: 'Content', actionPoints: ['Video production', 'SEO optimization', 'Community building'] },
-      { id: 207, name: 'Retargeting Campaigns', startDate: '2025-08', endDate: '2025-11', stream: 'Paid Ads', actionPoints: ['Pixel setup', 'Audience segments', 'Creative assets'] },
-      { id: 208, name: 'LinkedIn Strategy', startDate: '2025-09', endDate: '2026-01', stream: 'Social Media', actionPoints: ['Company page optimization', 'Thought leadership posts', 'Lead gen forms'] },
+      { id: 201, name: 'SEO Audit & Revamp', startDate: '2025-01-10', endDate: '2025-03-25', stream: 'SEO', actionPoints: ['Keyword research', 'On-page optimization', 'Backlink strategy'] },
+      { id: 202, name: 'Google Ads Launch', startDate: '2025-02-05', endDate: '2025-04-15', stream: 'Paid Ads', actionPoints: ['Campaign setup', 'Ad copy creation', 'Budget allocation'] },
+      { id: 203, name: 'Instagram Growth', startDate: '2025-03-01', endDate: '2025-06-20', stream: 'Social Media', actionPoints: ['Content calendar', 'Influencer outreach', 'Reels strategy'] },
+      { id: 204, name: 'Newsletter Relaunch', startDate: '2025-04-10', endDate: '2025-05-30', stream: 'Email Marketing', actionPoints: ['Template redesign', 'Segmentation setup', 'A/B subject lines'] },
+      { id: 205, name: 'Blog Content Hub', startDate: '2025-05-01', endDate: '2025-09-15', stream: 'Content', actionPoints: ['Editorial calendar', '10 pillar articles', 'Guest post outreach'] },
+      { id: 206, name: 'YouTube Channel', startDate: '2025-07-10', endDate: '2025-12-20', stream: 'Content', actionPoints: ['Video production', 'SEO optimization', 'Community building'] },
+      { id: 207, name: 'Retargeting Campaigns', startDate: '2025-08-05', endDate: '2025-11-25', stream: 'Paid Ads', actionPoints: ['Pixel setup', 'Audience segments', 'Creative assets'] },
+      { id: 208, name: 'LinkedIn Strategy', startDate: '2025-09-15', endDate: '2026-01-10', stream: 'Social Media', actionPoints: ['Company page optimization', 'Thought leadership posts', 'Lead gen forms'] },
     ]
   },
   {
@@ -70,21 +70,37 @@ const defaultTemplates: Template[] = [
     description: 'Sales pipeline and lead management',
     streams: ['Lead Generation', 'Outreach', 'Pipeline', 'Closing', 'Account Management'],
     projects: [
-      { id: 301, name: 'ICP Definition', startDate: '2025-01', endDate: '2025-02', stream: 'Lead Generation', actionPoints: ['Market research', 'Persona creation', 'Scoring model'] },
-      { id: 302, name: 'Cold Outreach System', startDate: '2025-02', endDate: '2025-04', stream: 'Outreach', actionPoints: ['Email sequences', 'LinkedIn automation', 'Call scripts'] },
-      { id: 303, name: 'CRM Implementation', startDate: '2025-03', endDate: '2025-06', stream: 'Pipeline', actionPoints: ['HubSpot setup', 'Pipeline stages', 'Reporting dashboards'] },
-      { id: 304, name: 'Demo Playbook', startDate: '2025-05', endDate: '2025-07', stream: 'Closing', actionPoints: ['Demo script', 'Objection handling', 'Follow-up templates'] },
-      { id: 305, name: 'ABM Campaign', startDate: '2025-06', endDate: '2025-09', stream: 'Lead Generation', actionPoints: ['Target account list', 'Personalized content', 'Multi-channel strategy'] },
-      { id: 306, name: 'Renewal Playbook', startDate: '2025-08', endDate: '2025-11', stream: 'Account Management', actionPoints: ['Health score model', 'QBR templates', 'Upsell framework'] },
-      { id: 307, name: 'Partner Channel Launch', startDate: '2025-10', endDate: '2026-02', stream: 'Pipeline', actionPoints: ['Partner recruitment', 'Enablement portal', 'Commission structure'] },
+      { id: 301, name: 'ICP Definition', startDate: '2025-01-05', endDate: '2025-02-28', stream: 'Lead Generation', actionPoints: ['Market research', 'Persona creation', 'Scoring model'] },
+      { id: 302, name: 'Cold Outreach System', startDate: '2025-02-15', endDate: '2025-04-20', stream: 'Outreach', actionPoints: ['Email sequences', 'LinkedIn automation', 'Call scripts'] },
+      { id: 303, name: 'CRM Implementation', startDate: '2025-03-10', endDate: '2025-06-30', stream: 'Pipeline', actionPoints: ['HubSpot setup', 'Pipeline stages', 'Reporting dashboards'] },
+      { id: 304, name: 'Demo Playbook', startDate: '2025-05-01', endDate: '2025-07-15', stream: 'Closing', actionPoints: ['Demo script', 'Objection handling', 'Follow-up templates'] },
+      { id: 305, name: 'ABM Campaign', startDate: '2025-06-10', endDate: '2025-09-25', stream: 'Lead Generation', actionPoints: ['Target account list', 'Personalized content', 'Multi-channel strategy'] },
+      { id: 306, name: 'Renewal Playbook', startDate: '2025-08-01', endDate: '2025-11-20', stream: 'Account Management', actionPoints: ['Health score model', 'QBR templates', 'Upsell framework'] },
+      { id: 307, name: 'Partner Channel Launch', startDate: '2025-10-15', endDate: '2026-02-10', stream: 'Pipeline', actionPoints: ['Partner recruitment', 'Enablement portal', 'Commission structure'] },
     ]
   }
 ];
 
+function migrateDate(d: string): string {
+  if (d && d.length === 7) return d + '-01';
+  return d;
+}
+
 function loadTemplates(): Template[] {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) return JSON.parse(saved);
+    if (saved) {
+      const templates: Template[] = JSON.parse(saved);
+      let migrated = false;
+      templates.forEach(t => {
+        t.projects.forEach(p => {
+          if (p.startDate && p.startDate.length === 7) { p.startDate = migrateDate(p.startDate); migrated = true; }
+          if (p.endDate && p.endDate.length === 7) { p.endDate = migrateDate(p.endDate); migrated = true; }
+        });
+      });
+      if (migrated) localStorage.setItem(STORAGE_KEY, JSON.stringify(templates));
+      return templates;
+    }
   } catch {}
   return defaultTemplates;
 }
@@ -309,25 +325,39 @@ const RoadmapEditor = ({ template, onUpdate, onBack }: {
   const updateAP = (i: number, v: string) => { const a = [...formData.actionPoints]; a[i] = v; setFormData({ ...formData, actionPoints: a }); };
   const removeAP = (i: number) => { if (formData.actionPoints.length > 1) setFormData({ ...formData, actionPoints: formData.actionPoints.filter((_, idx) => idx !== i) }); };
 
+  const parseDate = (d: string) => {
+    if (d.length === 7) return new Date(d + '-01');
+    return new Date(d);
+  };
+
   const getDateRange = () => {
-    if (!projects.length) return { start: new Date(), months: [] as Date[] };
-    const dates = projects.flatMap(p => [new Date(p.startDate), new Date(p.endDate)]);
-    const start = new Date(Math.min(...dates.map(d => d.getTime())));
-    const end = new Date(Math.max(...dates.map(d => d.getTime())));
+    if (!projects.length) {
+      const now = new Date();
+      const start = new Date(now.getFullYear(), 0, 1);
+      const months: Date[] = [];
+      for (let i = 0; i < 12; i++) { months.push(new Date(now.getFullYear(), i, 1)); }
+      return { start, months, totalDays: 365 };
+    }
+    const dates = projects.flatMap(p => [parseDate(p.startDate), parseDate(p.endDate)]);
+    const minDate = new Date(Math.min(...dates.map(d => d.getTime())));
+    const maxDate = new Date(Math.max(...dates.map(d => d.getTime())));
+    const start = new Date(minDate.getFullYear(), minDate.getMonth(), 1);
+    const endMonth = new Date(maxDate.getFullYear(), maxDate.getMonth() + 1, 0);
     const months: Date[] = [];
-    const cur = new Date(start.getFullYear(), start.getMonth(), 1);
-    while (cur <= end) { months.push(new Date(cur)); cur.setMonth(cur.getMonth() + 1); }
-    return { start, months };
+    const cur = new Date(start);
+    while (cur <= endMonth) { months.push(new Date(cur)); cur.setMonth(cur.getMonth() + 1); }
+    const totalDays = Math.max(1, (endMonth.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+    return { start, months, totalDays };
   };
 
   const calcLayout = () => {
     const layout: Record<number, { stream: string; lane: number; totalLanes: number }> = {};
     streams.forEach(stream => {
-      const sp = projects.filter(p => p.stream === stream).sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+      const sp = projects.filter(p => p.stream === stream).sort((a, b) => parseDate(a.startDate).getTime() - parseDate(b.startDate).getTime());
       const lanes: RoadmapProject[][] = [];
       sp.forEach(proj => {
-        const pS = new Date(proj.startDate);
-        let li = lanes.findIndex(lane => lane.every(e => new Date(e.endDate) < pS));
+        const pS = parseDate(proj.startDate);
+        let li = lanes.findIndex(lane => lane.every(e => parseDate(e.endDate) < pS));
         if (li === -1) { li = lanes.length; lanes.push([]); }
         lanes[li].push(proj);
         layout[proj.id] = { stream, lane: li, totalLanes: 0 };
@@ -337,17 +367,19 @@ const RoadmapEditor = ({ template, onUpdate, onBack }: {
     return layout;
   };
 
-  const { start: rangeStart, months } = getDateRange();
+  const { start: rangeStart, months, totalDays } = getDateRange();
   const layout = calcLayout();
+  const rangeEnd = months.length > 0 ? new Date(months[months.length - 1].getFullYear(), months[months.length - 1].getMonth() + 1, 0) : rangeStart;
 
   const getPos = (proj: RoadmapProject) => {
-    const pS = new Date(proj.startDate);
-    const pE = new Date(proj.endDate);
-    const total = months.length;
-    if (total === 0) return { left: '0%', width: '100%' };
-    const sm = (pS.getFullYear() - rangeStart.getFullYear()) * 12 + pS.getMonth() - rangeStart.getMonth();
-    const dur = (pE.getFullYear() - pS.getFullYear()) * 12 + pE.getMonth() - pS.getMonth() + 1;
-    return { left: `${(sm / total) * 100}%`, width: `${(dur / total) * 100}%` };
+    const pS = parseDate(proj.startDate);
+    const pE = parseDate(proj.endDate);
+    if (totalDays === 0) return { left: '0%', width: '100%' };
+    const startOffset = Math.max(0, (pS.getTime() - rangeStart.getTime()) / (1000 * 60 * 60 * 24));
+    const endOffset = Math.min(totalDays, (pE.getTime() - rangeStart.getTime()) / (1000 * 60 * 60 * 24));
+    const leftPct = (startOffset / totalDays) * 100;
+    const widthPct = Math.max(1, ((endOffset - startOffset) / totalDays) * 100);
+    return { left: `${leftPct}%`, width: `${widthPct}%` };
   };
 
   return (
@@ -399,11 +431,11 @@ const RoadmapEditor = ({ template, onUpdate, onBack }: {
           </div>
           <div>
             <label className="block text-xs font-medium text-gray-700 mb-1">Start Date</label>
-            <input type="month" value={formData.startDate} onChange={e => setFormData({ ...formData, startDate: e.target.value })} className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm" />
+            <input type="date" value={formData.startDate} onChange={e => setFormData({ ...formData, startDate: e.target.value })} className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm" />
           </div>
           <div>
             <label className="block text-xs font-medium text-gray-700 mb-1">End Date</label>
-            <input type="month" value={formData.endDate} onChange={e => setFormData({ ...formData, endDate: e.target.value })} className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm" />
+            <input type="date" value={formData.endDate} onChange={e => setFormData({ ...formData, endDate: e.target.value })} className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm" />
           </div>
           <div>
             <label className="block text-xs font-medium text-gray-700 mb-1">Stream / Service</label>
@@ -451,7 +483,7 @@ const RoadmapEditor = ({ template, onUpdate, onBack }: {
                 <div key={p.id} className={`flex items-start justify-between p-2 rounded cursor-pointer transition-colors ${selectedProject === p.id ? 'bg-blue-100 border-2 border-blue-400' : 'bg-gray-50 hover:bg-gray-100'}`} onClick={() => selectProject(p.id)}>
                   <div className="flex-1 min-w-0">
                     <div className="font-medium text-xs text-gray-900 truncate">{p.name}</div>
-                    <div className="text-xs text-gray-500">{p.startDate} &rarr; {p.endDate}</div>
+                    <div className="text-xs text-gray-500">{parseDate(p.startDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} &rarr; {parseDate(p.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</div>
                     <div className="text-xs font-medium mt-0.5" style={{ color: getStreamColor(p.stream) }}>{p.stream}</div>
                     {p.actionPoints?.length > 0 && (
                       <div className="flex items-center gap-1 mt-0.5 text-xs text-gray-400">
@@ -473,10 +505,7 @@ const RoadmapEditor = ({ template, onUpdate, onBack }: {
           <span className="text-sm text-gray-400 flex items-center gap-1"><LayoutTemplate size={16} />{template.name}</span>
         </div>
 
-        {!projects.length ? (
-          <div className="flex items-center justify-center h-64 text-gray-400">Add projects to see the roadmap</div>
-        ) : (
-          <div className="bg-white border border-gray-200 rounded-lg p-4">
+        <div className="bg-white border border-gray-200 rounded-lg p-4">
             <div className="flex mb-4">
               <div className="w-40 flex-shrink-0" />
               <div className="flex-1 flex">
@@ -490,9 +519,8 @@ const RoadmapEditor = ({ template, onUpdate, onBack }: {
 
             {streams.map(stream => {
               const sp = projects.filter(p => p.stream === stream);
-              if (!sp.length) return null;
-              const maxLanes = Math.max(...sp.map(p => layout[p.id]?.totalLanes || 1));
-              const laneH = 40 + (maxLanes - 1) * 50;
+              const maxLanes = sp.length ? Math.max(...sp.map(p => layout[p.id]?.totalLanes || 1)) : 1;
+              const laneH = sp.length ? 40 + (maxLanes - 1) * 50 : 40;
 
               return (
                 <div key={stream} className="mb-4 border-b border-gray-200 pb-4">
@@ -500,7 +528,7 @@ const RoadmapEditor = ({ template, onUpdate, onBack }: {
                     <div className="w-40 flex-shrink-0 flex items-center">
                       <span className="font-semibold text-sm" style={{ color: getStreamColor(stream) }}>{stream}</span>
                     </div>
-                    <div className="flex-1 relative" style={{ height: `${laneH}px` }}>
+                    <div className="flex-1 relative overflow-hidden" style={{ height: `${laneH}px` }}>
                       <div className="absolute inset-0 flex">
                         {months.map((_, i) => <div key={i} className="flex-1 border-l border-gray-100" />)}
                       </div>
@@ -511,15 +539,19 @@ const RoadmapEditor = ({ template, onUpdate, onBack }: {
                         const top = 10 + (li?.lane || 0) * 50;
                         const isSel = selectedProject === proj.id;
                         const isHov = hoveredProject === proj.id;
+                        const fmtDate = (d: string) => {
+                          const dt = parseDate(d);
+                          return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                        };
 
                         return (
-                          <div key={proj.id} className="absolute" style={{ left: pos.left, width: pos.width, top, minWidth: 80, zIndex: isSel ? 30 : isHov ? 20 : 10 }}
+                          <div key={proj.id} className="absolute" style={{ left: pos.left, width: pos.width, top, zIndex: isSel ? 30 : isHov ? 20 : 10 }}
                             onMouseEnter={() => setHoveredProject(proj.id)}
                             onMouseLeave={() => setHoveredProject(null)}
                             onClick={() => selectProject(proj.id)}
                           >
                             <div className={`rounded px-2 py-1 text-white text-xs font-medium shadow-sm hover:shadow-lg transition-all cursor-pointer ${isSel ? 'ring-4 ring-gray-900 ring-opacity-50' : ''}`}
-                              style={{ height: 36, backgroundColor: getStreamColor(stream), display: 'flex', alignItems: 'center', opacity: isSel ? 1 : 0.9, transform: isSel ? 'scale(1.02)' : 'scale(1)' }}
+                              style={{ height: 36, backgroundColor: getStreamColor(stream), display: 'flex', alignItems: 'center', opacity: isSel ? 1 : 0.9, transform: isSel ? 'scale(1.02)' : 'scale(1)', minWidth: 60 }}
                             >
                               <span className="truncate">{proj.name}</span>
                             </div>
@@ -528,7 +560,7 @@ const RoadmapEditor = ({ template, onUpdate, onBack }: {
                               <div className="absolute left-0 bg-white border-2 border-gray-300 rounded-lg shadow-xl p-3 mt-1 w-64 z-50" style={{ top: 40 }}>
                                 <div className="mb-2 pb-2 border-b border-gray-200">
                                   <div className="font-bold text-gray-900 text-sm">{proj.name}</div>
-                                  <div className="text-xs text-gray-500 mt-0.5">{proj.startDate} &rarr; {proj.endDate}</div>
+                                  <div className="text-xs text-gray-500 mt-0.5">{fmtDate(proj.startDate)} &rarr; {fmtDate(proj.endDate)}</div>
                                 </div>
                                 {proj.actionPoints?.length > 0 && (
                                   <>
@@ -554,8 +586,11 @@ const RoadmapEditor = ({ template, onUpdate, onBack }: {
                 </div>
               );
             })}
+
+            {!projects.length && (
+              <div className="text-center py-8 text-gray-400 text-sm">Add projects to see the roadmap</div>
+            )}
           </div>
-        )}
       </div>
     </div>
   );
