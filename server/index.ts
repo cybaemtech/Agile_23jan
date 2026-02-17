@@ -108,21 +108,6 @@ app.use(session({
   }
 }));
 
-// Auto-login middleware: automatically set session to admin user (TEMPORARY - bypass login)
-app.use(async (req, res, next) => {
-  if (!(req.session as any).userId) {
-    try {
-      const allUsers = await storage.getUsers();
-      const adminUser = allUsers.find((u: any) => u.role === 'ADMIN') || allUsers[0];
-      if (adminUser) {
-        (req.session as any).userId = adminUser.id;
-        (req.session as any).userRole = adminUser.role;
-      }
-    } catch (e) {}
-  }
-  next();
-});
-
 // Test route to verify session creation
 app.get('/api/test-session', (req, res) => {
   (req.session as any).test = 'hello';
