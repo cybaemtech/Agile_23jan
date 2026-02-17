@@ -520,15 +520,16 @@ const RoadmapEditor = ({ template, onUpdate, onBack }: {
             {streams.map(stream => {
               const sp = projects.filter(p => p.stream === stream);
               const maxLanes = sp.length ? Math.max(...sp.map(p => layout[p.id]?.totalLanes || 1)) : 1;
-              const laneH = sp.length ? 40 + (maxLanes - 1) * 50 : 40;
+              const laneH = sp.length ? 56 + (maxLanes - 1) * 50 : 40;
+              const hasHover = sp.some(p => p.id === hoveredProject);
 
               return (
-                <div key={stream} className="mb-4 border-b border-gray-200 pb-4">
+                <div key={stream} className="mb-4 border-b border-gray-200 pb-4" style={{ position: 'relative', zIndex: hasHover ? 100 : 1 }}>
                   <div className="flex">
                     <div className="w-40 flex-shrink-0 flex items-center">
                       <span className="font-semibold text-sm" style={{ color: getStreamColor(stream) }}>{stream}</span>
                     </div>
-                    <div className="flex-1 relative overflow-hidden" style={{ height: `${laneH}px` }}>
+                    <div className="flex-1 relative" style={{ height: `${laneH}px` }}>
                       <div className="absolute inset-0 flex">
                         {months.map((_, i) => <div key={i} className="flex-1 border-l border-gray-100" />)}
                       </div>
