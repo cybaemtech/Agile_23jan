@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Plus, X, CheckCircle, Edit2, ChevronDown, ChevronRight, LayoutTemplate, Trash2, Copy, ArrowLeft } from 'lucide-react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { Plus, X, CheckCircle, Edit2, ChevronDown, ChevronRight, LayoutTemplate, Trash2, Copy, ArrowLeft, GripVertical } from 'lucide-react';
 import { Sidebar } from '@/components/layout/sidebar';
 import { Header } from '@/components/layout/header';
 import { useAuth } from '@/hooks/useAuth';
@@ -249,6 +249,8 @@ const RoadmapEditor = ({ template, onUpdate, onBack }: {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [isProjectsExpanded, setIsProjectsExpanded] = useState(true);
   const [formData, setFormData] = useState({ name: '', startDate: '', endDate: '', stream: template.streams[0] || '', actionPoints: [''] });
+  const [dragStreamIdx, setDragStreamIdx] = useState<number | null>(null);
+  const [dragOverIdx, setDragOverIdx] = useState<number | null>(null);
 
   const getStreamColor = (s: string) => colorPalette[streams.indexOf(s) % colorPalette.length];
 
@@ -277,6 +279,35 @@ const RoadmapEditor = ({ template, onUpdate, onBack }: {
     }
     if (formData.stream === s) setFormData({ ...formData, stream: updated[0] || '' });
     onUpdate({ ...template, streams: updated, projects: filteredProjects });
+  };
+
+  const handleStreamDragStart = (idx: number) => {
+    setDragStreamIdx(idx);
+  };
+
+  const handleStreamDragOver = (e: React.DragEvent, idx: number) => {
+    e.preventDefault();
+    setDragOverIdx(idx);
+  };
+
+  const handleStreamDrop = (idx: number) => {
+    if (dragStreamIdx === null || dragStreamIdx === idx) {
+      setDragStreamIdx(null);
+      setDragOverIdx(null);
+      return;
+    }
+    const reordered = [...streams];
+    const [moved] = reordered.splice(dragStreamIdx, 1);
+    reordered.splice(idx, 0, moved);
+    setStreams(reordered);
+    onUpdate({ ...template, streams: reordered, projects });
+    setDragStreamIdx(null);
+    setDragOverIdx(null);
+  };
+
+  const handleStreamDragEnd = () => {
+    setDragStreamIdx(null);
+    setDragOverIdx(null);
   };
 
   const persistTemplate = (p: RoadmapProject[]) => onUpdate({ ...template, streams, projects: p });
@@ -411,11 +442,22 @@ const RoadmapEditor = ({ template, onUpdate, onBack }: {
               <button onClick={addStream} className="px-3 py-1 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700">Add</button>
             </div>
           )}
-          <div className="space-y-1">
-            {streams.map(s => (
-              <div key={s} className="flex items-center justify-between px-2 py-1 rounded hover:bg-gray-50 group">
+          <div className="space-y-0.5">
+            {streams.map((s, idx) => (
+              <div
+                key={s}
+                draggable
+                onDragStart={() => handleStreamDragStart(idx)}
+                onDragOver={e => handleStreamDragOver(e, idx)}
+                onDrop={() => handleStreamDrop(idx)}
+                onDragEnd={handleStreamDragEnd}
+                className={`flex items-center justify-between px-2 py-1.5 rounded group cursor-grab active:cursor-grabbing transition-all ${
+                  dragStreamIdx === idx ? 'opacity-40 bg-gray-100' : dragOverIdx === idx ? 'bg-blue-50 border border-blue-300 border-dashed' : 'hover:bg-gray-50'
+                }`}
+              >
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded" style={{ backgroundColor: getStreamColor(s) }} />
+                  <GripVertical size={14} className="text-gray-300 group-hover:text-gray-500 flex-shrink-0" />
+                  <div className="w-3 h-3 rounded flex-shrink-0" style={{ backgroundColor: getStreamColor(s) }} />
                   <span className="text-sm text-gray-700">{s}</span>
                 </div>
                 <button onClick={() => deleteStream(s)} className="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-500 transition-opacity"><X size={14} /></button>
