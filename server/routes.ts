@@ -11,6 +11,8 @@ import {
   insertWorkItemSchema,
   emailSchema,
   users,
+  roadmapTemplates,
+  insertRoadmapTemplateSchema,
 } from "@shared/schema";
 import { ZodError, z } from "zod";
 import {
@@ -863,6 +865,88 @@ export async function registerRoutes(app: Express): Promise<Server> {
     console.error("Unexpected error:", error);
     return res.status(500).json({ message: "Internal server error" });
   };
+
+  app.get("/api/roadmap-templates", async (_req: Request, res: Response) => {
+    const all = await db.select().from(roadmapTemplates).orderBy(roadmapTemplates.id);
+    const result = all.map(t => ({
+      id: t.id,
+      name: t.name,
+      description: t.description || '',
+      streams: JSON.parse(t.streams),
+      projects: JSON.parse(t.projects),
+    }));
+    res.json(result);
+  });
+
+  app.post("/api/roadmap-templates/seed", async (_req: Request, res: Response) => {
+    const existing = await db.select().from(roadmapTemplates);
+    if (existing.length > 0) {
+      return res.json(existing.map(t => ({
+        id: t.id, name: t.name, description: t.description || '',
+        streams: JSON.parse(t.streams), projects: JSON.parse(t.projects),
+      })));
+    }
+    const defaults = [
+      { name: 'Product Roadmap', description: 'Core product streams for feature planning', streams: ['Growth','Retention','Platform','Infrastructure','Experience'], projects: [] },
+      { name: 'Digital Marketing Plan', description: 'Marketing channels and campaign planning', streams: ['SEO','Paid Ads','Social Media','Email Marketing','Content'], projects: [] },
+      { name: 'Sales & CRM', description: 'Sales pipeline and lead management', streams: ['Lead Generation','Outreach','Pipeline','Closing','Account Management'], projects: [] },
+    ];
+    const result = [];
+    for (const d of defaults) {
+      const [created] = await db.insert(roadmapTemplates).values({
+        name: d.name, description: d.description,
+        streams: JSON.stringify(d.streams), projects: JSON.stringify(d.projects),
+      }).returning();
+      result.push({ id: created.id, name: created.name, description: created.description || '', streams: d.streams, projects: d.projects });
+    }
+    res.json(result);
+  });
+
+  app.post("/api/roadmap-templates", async (req: Request, res: Response) => {
+    const { name, description, streams, projects } = req.body;
+    const [created] = await db.insert(roadmapTemplates).values({
+      name,
+      description: description || '',
+      streams: JSON.stringify(streams || []),
+      projects: JSON.stringify(projects || []),
+    }).returning();
+    res.json({
+      id: created.id,
+      name: created.name,
+      description: created.description || '',
+      streams: JSON.parse(created.streams),
+      projects: JSON.parse(created.projects),
+    });
+  });
+
+  app.put("/api/roadmap-templates/:id", async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id);
+    const { name, description, streams, projects } = req.body;
+    const [updated] = await db.update(roadmapTemplates)
+      .set({
+        name,
+        description: description || '',
+        streams: JSON.stringify(streams || []),
+        projects: JSON.stringify(projects || []),
+        updatedAt: new Date(),
+      })
+      .where(eq(roadmapTemplates.id, id))
+      .returning();
+    if (!updated) return res.status(404).json({ error: 'Template not found' });
+    res.json({
+      id: updated.id,
+      name: updated.name,
+      description: updated.description || '',
+      streams: JSON.parse(updated.streams),
+      projects: JSON.parse(updated.projects),
+    });
+  });
+
+  app.delete("/api/roadmap-templates/:id", async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id);
+    await db.delete(roadmapTemplates).where(eq(roadmapTemplates.id, id));
+    res.json({ success: true });
+  });
 
   return httpServer;
 }

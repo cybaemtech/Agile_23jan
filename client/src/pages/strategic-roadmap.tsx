@@ -27,8 +27,6 @@ interface Template {
   projects: RoadmapProject[];
 }
 
-const STORAGE_KEY = 'strategic-roadmap-templates';
-
 const defaultTemplates: Template[] = [
   {
     id: 1,
@@ -86,27 +84,45 @@ function migrateDate(d: string): string {
   return d;
 }
 
-function loadTemplates(): Template[] {
+async function fetchTemplates(): Promise<Template[]> {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      const templates: Template[] = JSON.parse(saved);
-      let migrated = false;
-      templates.forEach(t => {
+    const res = await fetch('/api/roadmap-templates');
+    if (res.ok) {
+      const data: Template[] = await res.json();
+      data.forEach(t => {
         t.projects.forEach(p => {
-          if (p.startDate && p.startDate.length === 7) { p.startDate = migrateDate(p.startDate); migrated = true; }
-          if (p.endDate && p.endDate.length === 7) { p.endDate = migrateDate(p.endDate); migrated = true; }
+          p.startDate = migrateDate(p.startDate);
+          p.endDate = migrateDate(p.endDate);
         });
       });
-      if (migrated) localStorage.setItem(STORAGE_KEY, JSON.stringify(templates));
-      return templates;
+      if (data.length > 0) return data;
     }
+    const res2 = await fetch('/api/roadmap-templates/seed', { method: 'POST' });
+    if (res2.ok) return res2.json();
   } catch {}
-  return defaultTemplates;
+  return [];
 }
 
-function saveTemplates(templates: Template[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(templates));
+async function apiCreateTemplate(t: { name: string; description: string; streams: string[]; projects: RoadmapProject[] }): Promise<Template> {
+  const res = await fetch('/api/roadmap-templates', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(t),
+  });
+  return res.json();
+}
+
+async function apiUpdateTemplate(t: Template): Promise<Template> {
+  const res = await fetch(`/api/roadmap-templates/${t.id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(t),
+  });
+  return res.json();
+}
+
+async function apiDeleteTemplate(id: number): Promise<void> {
+  await fetch(`/api/roadmap-templates/${id}`, { method: 'DELETE' });
 }
 
 const TemplateGallery = ({ templates, onSelect, onCreate, onDelete, onDuplicate }: {
@@ -641,40 +657,59 @@ const RoadmapEditor = ({ template, onUpdate, onBack }: {
 
 export default function StrategicRoadmapPage() {
   const { user } = useAuth();
-  const [templates, setTemplates] = useState<Template[]>(loadTemplates);
+  const [templates, setTemplates] = useState<Template[]>([]);
   const [activeId, setActiveId] = useState<number | null>(null);
   const [showNewModal, setShowNewModal] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    saveTemplates(templates);
-  }, [templates]);
+    fetchTemplates().then(data => {
+      setTemplates(data);
+      setLoading(false);
+    });
+  }, []);
 
   const activeTemplate = templates.find(t => t.id === activeId);
 
-  const handleCreate = ({ name, description, streams }: { name: string; description: string; streams: string[] }) => {
-    const t: Template = { id: Date.now(), name, description, streams, projects: [] };
-    setTemplates([...templates, t]);
-    setActiveId(t.id);
+  const handleCreate = async ({ name, description, streams }: { name: string; description: string; streams: string[] }) => {
+    const created = await apiCreateTemplate({ name, description, streams, projects: [] });
+    setTemplates([...templates, created]);
+    setActiveId(created.id);
     setShowNewModal(false);
   };
 
-  const handleDelete = (id: number) => {
+  const handleDelete = async (id: number) => {
     if (!confirm('Delete this template?')) return;
+    await apiDeleteTemplate(id);
     setTemplates(templates.filter(t => t.id !== id));
   };
 
-  const handleDuplicate = (id: number) => {
+  const handleDuplicate = async (id: number) => {
     const src = templates.find(t => t.id === id);
     if (!src) return;
-    const copy: Template = { ...src, id: Date.now(), name: `${src.name} (Copy)`, projects: src.projects.map(p => ({ ...p, id: Date.now() + Math.random() })) };
-    setTemplates([...templates, copy]);
+    const created = await apiCreateTemplate({
+      name: `${src.name} (Copy)`,
+      description: src.description,
+      streams: src.streams,
+      projects: src.projects,
+    });
+    setTemplates([...templates, created]);
   };
 
-  const handleUpdate = (updated: Template) => {
-    setTemplates(templates.map(t => t.id === updated.id ? updated : t));
-  };
+  const updateTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const handleUpdate = useCallback((updated: Template) => {
+    setTemplates(prev => prev.map(t => t.id === updated.id ? updated : t));
+    if (updateTimerRef.current) clearTimeout(updateTimerRef.current);
+    updateTimerRef.current = setTimeout(() => {
+      apiUpdateTemplate(updated);
+    }, 500);
+  }, []);
 
-  const content = activeTemplate ? (
+  const content = loading ? (
+    <div className="flex items-center justify-center h-64">
+      <div className="text-gray-500">Loading templates...</div>
+    </div>
+  ) : activeTemplate ? (
     <RoadmapEditor template={activeTemplate} onUpdate={handleUpdate} onBack={() => setActiveId(null)} />
   ) : (
     <>
