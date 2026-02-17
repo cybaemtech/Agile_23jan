@@ -114,17 +114,29 @@ app.use(async (req: any, _res: Response, next: NextFunction) => {
   if (req.path.startsWith('/api')) {
     try {
       if (!cachedAdminUser) {
-        cachedAdminUser = await storage.getUserByEmail('admin@company.com');
-      }
-      if (cachedAdminUser) {
-        if (req.session) {
-          req.session.userId = cachedAdminUser.id;
-          req.session.user = cachedAdminUser;
+        const dbUser = await storage.getUserByEmail('admin@company.com');
+        if (dbUser) {
+          cachedAdminUser = dbUser;
         }
-        req.user = cachedAdminUser;
-        req.isAuthenticated = () => true;
       }
-    } catch {}
+    } catch (e) {
+      console.error('Demo bypass: DB lookup failed, using hardcoded admin', e);
+    }
+    const adminUser = cachedAdminUser || {
+      id: 1,
+      username: 'admin',
+      email: 'admin@company.com',
+      fullName: 'Sarah Johnson',
+      role: 'ADMIN',
+      avatarUrl: null,
+      isActive: true,
+    };
+    if (req.session) {
+      req.session.userId = adminUser.id;
+      req.session.user = adminUser;
+    }
+    req.user = adminUser;
+    req.isAuthenticated = () => true;
   }
   next();
 });
