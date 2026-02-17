@@ -232,8 +232,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/teams", async (req: any, res) => {
     try {
-      // Get the user ID from the session
-      const userId = req.session?.userId;
+      const userId = req.session?.userId || req.user?.id;
       
       if (!userId) {
         return res.status(401).json({ message: "Unauthorized: Not logged in" });
@@ -599,14 +598,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/projects", async (req: any, res) => {
     try {
-      // Get the user ID from the session
-      const userId = req.session?.userId;
-      
-      console.log('📋 GET /api/projects - Session info:', {
-        sessionId: req.session?.id,
-        userId: userId,
-        sessionData: req.session
-      });
+      const userId = req.session?.userId || req.user?.id;
 
       if (!userId) {
         return res.status(401).json({ message: "Unauthorized: Not logged in" });
