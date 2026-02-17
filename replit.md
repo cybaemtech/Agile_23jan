@@ -47,7 +47,21 @@ A full-stack agile project management application built with React (Vite) fronte
 - Vite is used in middleware mode during development
 - Database schema managed via Drizzle with `drizzle-kit push`
 
+## Demo Mode (TEMPORARY)
+- **Login bypass**: Middleware in `server/index.ts` auto-injects admin user (admin@company.com / Sarah Johnson) into all API sessions
+- **Auth routes**: `/api/auth/user` returns admin user when no session exists (`server/auth-routes.ts`)
+- **Frontend**: Auth checks removed from route guards in `client/src/App.tsx`
+- **To re-enable auth**: Remove the "TEMPORARY" middleware block in `server/index.ts`, restore auth checks in `App.tsx`, and revert `/api/auth/user` fallback in `auth-routes.ts`
+
+## Seed Data
+- Script: `server/seed.ts` - run with `npx tsx server/seed.ts`
+- 10 users, 4 teams, 5 projects, 49 work items with varied statuses/priorities/types
+- Includes comments, activity logs, and project member assignments
+
 ## Recent Changes
+- Added demo bypass middleware for production deployment without login
+- Seeded database with comprehensive sample data (49 work items across 5 projects)
+- Fixed base path from '/Agile' to '/' for direct dashboard access
 - Added Strategic Swimlane Roadmap feature (`/roadmap` route) with template gallery, Gantt-style editor, and localStorage persistence
 - Configured for Replit environment (removed external proxy, fixed base path)
 - Set up PostgreSQL database

@@ -69,7 +69,7 @@ function Routes() {
 }
 
 function App() {
-  const base = import.meta.env.PROD ? '/Agile' : '/';
+  const base = '/';
   
   return (
     <QueryClientProvider client={queryClient}>
