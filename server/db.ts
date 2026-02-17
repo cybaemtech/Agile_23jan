@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import { drizzle } from 'drizzle-orm/neon-serverless';
-import { neon } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/node-postgres';
+import { Pool } from 'pg';
 import * as schema from '@shared/schema';
 
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -18,8 +18,8 @@ let db: ReturnType<typeof drizzle<typeof schema>> | null = null;
 
 if (DATABASE_URL) {
   try {
-    const sql = neon(DATABASE_URL);
-    db = drizzle(sql, { schema });
+    const pool = new Pool({ connectionString: DATABASE_URL });
+    db = drizzle(pool, { schema });
     console.log('Using PostgreSQL database for data storage');
   } catch (error) {
     console.error('PostgreSQL connection failed:', error);

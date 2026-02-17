@@ -22,11 +22,13 @@ import {
   canAccessProject,
 } from "./auth-middleware";
 import authRouter from "./auth-routes";
+import otpRouter from "./otp-routes";
 import { eq } from "drizzle-orm";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Register auth routes
   app.use("/api/auth", authRouter);
+  app.use("/api/login-otp", otpRouter);
 
   // User routes
   app.get("/api/users/all", async (_req, res) => {
