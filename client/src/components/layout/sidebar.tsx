@@ -16,7 +16,7 @@ import {
   Map,
 } from "lucide-react";
 import { Team, Project, User } from "@shared/schema";
-import CybaemLogo from "@/assets/cybaem-logo.png";
+import CybaemLogo from "@assets/01_CYBAEM_TECH_Logo_2026_PNG_1_1771353980791.png";
 
 interface SidebarProps {
   user?: User;
@@ -81,14 +81,13 @@ export function Sidebar({
       )}>
         {!isCollapsed && (
           <div className="flex flex-col items-center justify-center flex-1">
-            <span className="font-bold text-xl text-blue-700 mb-2 tracking-wide">ProjectHub</span>
-            <img src={CybaemLogo} alt="Cybaem Tech Logo" className="h-10 opacity-90" />
-            <p className="text-xs text-gray-500 mt-1 text-center">Agile Project Management</p>
+            <img src={CybaemLogo} alt="Cybaem Tech Logo" className="h-10 mb-1" />
+            <p className="text-xs text-gray-500 mt-1 text-center">Project Management</p>
           </div>
         )}
         
         {isCollapsed && (
-          <img src={CybaemLogo} alt="Logo" className="h-8 opacity-90" />
+          <img src={CybaemLogo} alt="Logo" className="h-7 w-7 object-contain object-left" />
         )}
 
         <button
