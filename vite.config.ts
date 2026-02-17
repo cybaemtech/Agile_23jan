@@ -31,7 +31,7 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 5000,
-    allowedHosts: ["all"],
+    allowedHosts: ["5272315f-38ae-4c60-9105-16638aec27f2-00-1o3ep80nvl7dh.sisko.replit.dev"],
     hmr: {
       clientPort: 443,
     },
@@ -39,7 +39,7 @@ export default defineConfig({
   preview: {
     host: '0.0.0.0',
     port: 4173,
-    allowedHosts: true,
+    allowedHosts: ["5272315f-38ae-4c60-9105-16638aec27f2-00-1o3ep80nvl7dh.sisko.replit.dev"],
   },
   resolve: {
     alias: {
