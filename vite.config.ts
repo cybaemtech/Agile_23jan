@@ -15,7 +15,7 @@ const getCurrentDir = () => {
 const __dirname = getCurrentDir();
 
 export default defineConfig({
-  base: process.env.NODE_ENV === 'production' ? '/Agile' : '/',
+  base: '/',
   plugins: [
     react(),
     runtimeErrorOverlay(),
@@ -35,37 +35,11 @@ export default defineConfig({
     hmr: {
       clientPort: 443,
     },
-    proxy: {
-      '/api': {
-        target: 'https://cybaemtech.in',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '/Agile/api'),
-        configure: (proxy, options) => {
-          proxy.on('error', (err, req, res) => {
-            console.error('Proxy error:', err);
-          });
-          proxy.on('proxyReq', (proxyReq, req, res) => {
-            console.log('Proxying request to:', proxyReq.getHeader('host') + proxyReq.path);
-          });
-        },
-      },
-    },
   },
   preview: {
     host: '0.0.0.0',
     port: 4173,
     allowedHosts: true,
-    proxy: {
-      '/api': {
-        target: 'https://cybaemtech.in',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '/Agile/api'),
-        secure: true,
-        headers: {
-          'Origin': 'https://cybaemtech.in'
-        }
-      },
-    },
   },
   resolve: {
     alias: {
