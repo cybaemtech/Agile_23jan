@@ -16,6 +16,7 @@ import { ChangePasswordModal } from "@/components/modals/change-password-modal";
 import { Project, User as UserType } from "@shared/schema";
 import { queryClient } from "@/lib/queryClient";
 import { SessionTimer } from "@/components/ui/session-timer";
+import { useAuth } from "@/hooks/useAuth";
 
 interface HeaderProps {
   currentProject?: Project;
@@ -27,9 +28,11 @@ interface HeaderProps {
 export function Header({
   currentProject,
   projects = [],
-  user,
+  user: userProp,
   onMobileMenuToggle
 }: HeaderProps) {
+  const { user: authUser } = useAuth();
+  const user = userProp || authUser;
   const [location, navigate] = useLocation();
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
