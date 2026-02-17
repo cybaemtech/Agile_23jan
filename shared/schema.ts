@@ -445,3 +445,17 @@ export type InsertWorkItemHistory = z.infer<typeof insertWorkItemHistorySchema>;
 
 export type ActivityLog = typeof activityLog.$inferSelect;
 export type InsertActivityLog = z.infer<typeof insertActivityLogSchema>;
+
+export const roadmapTemplates = pgTable("roadmap_templates", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  name: varchar("name", { length: 200 }).notNull(),
+  description: text("description").default(''),
+  streams: text("streams").notNull().default('[]'),
+  projects: text("projects").notNull().default('[]'),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const insertRoadmapTemplateSchema = createInsertSchema(roadmapTemplates).omit({ id: true, createdAt: true, updatedAt: true });
+export type RoadmapTemplate = typeof roadmapTemplates.$inferSelect;
+export type InsertRoadmapTemplate = z.infer<typeof insertRoadmapTemplateSchema>;
