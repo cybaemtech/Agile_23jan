@@ -1,27 +1,54 @@
-# Agile Project Management System
+# Project Management System
 
 ## Overview
-A comprehensive agile project management application built with Express, React, and PostgreSQL. The system supports team collaboration, project tracking, and work item management with features like Epics, Stories, and Tasks.
+A full-stack agile project management application built with React (Vite) frontend and Express backend, using PostgreSQL via Drizzle ORM.
 
-## Project Architecture
-- **Frontend**: React with Vite, Tailwind CSS, and Radix UI. Uses `wouter` for routing and `TanStack Query` for data fetching.
-- **Backend**: Express.js server providing a RESTful API.
-- **Database**: PostgreSQL with Drizzle ORM.
-- **Session Management**: `express-session` with `connect-pg-simple` (PostgreSQL) or `memorystore` (in-memory fallback).
-- **Authentication**: Passport.js with local strategy.
+## Tech Stack
+- **Frontend**: React 18, Vite, TailwindCSS, Radix UI, TanStack Query, Wouter (routing)
+- **Backend**: Express.js, TypeScript, tsx
+- **Database**: PostgreSQL (Neon serverless driver), Drizzle ORM
+- **Auth**: Session-based with bcryptjs
 
 ## Project Structure
-- `client/`: React frontend application.
-- `server/`: Express backend application.
-- `shared/`: Shared schemas and types (Drizzle ORM).
-- `attached_assets/`: Static assets and generated images.
+```
+├── client/           # React frontend
+│   └── src/
+│       ├── components/
+│       ├── hooks/
+│       ├── lib/        # API config, query client
+│       ├── pages/
+│       └── main.tsx
+├── server/           # Express backend
+│   ├── index.ts      # Server entry point
+│   ├── routes.ts     # API routes
+│   ├── db.ts         # Database connection
+│   ├── storage.ts    # Storage layer
+│   ├── DatabaseStorage.ts
+│   ├── auth-middleware.ts
+│   ├── auth-routes.ts
+│   └── vite.ts       # Vite middleware setup
+├── shared/
+│   └── schema.ts     # Drizzle schema (users, teams, projects, work items)
+├── vite.config.ts
+├── drizzle.config.ts
+├── tsconfig.json
+└── package.json
+```
+
+## Running
+- **Dev**: `npm run dev` (serves both frontend and backend on port 5000)
+- **Build**: `npm run build` (Vite build + esbuild server bundle)
+- **Production**: `npm run start`
+- **DB Push**: `npm run db:push`
+
+## Key Configuration
+- Frontend and backend served from the same Express process on port 5000
+- API routes are under `/api/`
+- Vite is used in middleware mode during development
+- Database schema managed via Drizzle with `drizzle-kit push`
 
 ## Recent Changes
-- **2025-12-25**: Added "Manage Team - All Users" page with active/inactive tabs and card-based UI.
-- **2025-12-25**: Fixed database connection to use Neon serverless and corrected build entry point.
-- **2025-12-22**: Initialized project, installed `cross-env`, and verified session management setup.
-
-## User Preferences
-- **Frameworks**: React, Express, Drizzle ORM.
-- **Styling**: Tailwind CSS, Lucide Icons.
-- **Port**: Always bind frontend to 0.0.0.0:5000.
+- Configured for Replit environment (removed external proxy, fixed base path)
+- Set up PostgreSQL database
+- Fixed missing `canDeleteWorkItem` import in routes
+- Fixed duplicate import in edit-item-modal

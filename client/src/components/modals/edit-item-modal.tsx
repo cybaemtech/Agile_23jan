@@ -27,7 +27,6 @@ import { TagsInput } from "@/components/ui/tags-input";
 import { Trash2 } from "lucide-react";
 import { getScreenshotUrl } from "@/lib/screenshot-utils";
 import { queryClient } from "@/lib/queryClient";
-import { getScreenshotUrl } from "@/lib/screenshot-utils";
 
 // Create a schema specifically for the form - matching CreateItemModal
 const workItemFormSchema = z.object({

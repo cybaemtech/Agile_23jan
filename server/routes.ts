@@ -17,6 +17,7 @@ import {
   isAdmin,
   isScrumMasterOrAdmin,
   canManageWorkItemType,
+  canDeleteWorkItem,
   canDeleteEntity,
   canAccessProject,
 } from "./auth-middleware";
