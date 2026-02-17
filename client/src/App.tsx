@@ -34,20 +34,13 @@ function Routes() {
 
   console.log('[Routes] Auth state:', { isAuthenticated, isUnauthenticated, isLoading, location });
 
-  // Immediate redirect logic - but only after auth state is determined
+  // Redirect to dashboard (login bypass active)
   useEffect(() => {
-    // Don't redirect if we're still loading auth state
     if (isLoading) return;
-    
-    if (isUnauthenticated) {
-      if (!location.startsWith("/login") && !location.startsWith("/register")) {
-        console.log('[App] Redirecting unauthenticated user to login from:', location);
-        setLocation("/login");
-      }
-    } else if (isAuthenticated && location === "/") {
+    if (location === "/" || location === "/login") {
       setLocation("/dashboard");
     }
-  }, [location, setLocation, isAuthenticated, isUnauthenticated, isLoading]);
+  }, [location, setLocation, isLoading]);
 
   // Show loading spinner while determining auth state
   if (isLoading) {
@@ -67,45 +60,19 @@ function Routes() {
       <Route path="/login" component={LoginPage} />
       <Route path="/register" component={Register} />
 
-      {/* Protected routes - show login immediately if not authenticated */}
-      <Route path="/dashboard">
-        {isAuthenticated ? <Dashboard /> : <LoginPage />}
-      </Route>
-      <Route path="/projects">
-        {isAuthenticated ? <Projects /> : <LoginPage />}
-      </Route>
-      <Route path="/projects/:id">
-        {isAuthenticated ? <ProjectDetails /> : <LoginPage />}
-      </Route>
-      <Route path="/teams">
-        {isAuthenticated ? <Teams /> : <LoginPage />}
-      </Route>
-      <Route path="/teams/:id">
-        {isAuthenticated ? <TeamDetails /> : <LoginPage />}
-      </Route>
-      <Route path="/timeline">
-        {isAuthenticated ? <Timeline /> : <LoginPage />}
-      </Route>
-      <Route path="/calendar">
-        {isAuthenticated ? <Timeline /> : <LoginPage />}
-      </Route>
-      <Route path="/reports">
-        {isAuthenticated ? <Reports /> : <LoginPage />}
-      </Route>
-      <Route path="/report-bug">
-        {isAuthenticated ? <ReportBug /> : <LoginPage />}
-      </Route>
-      <Route path="/project-bug-reports">
-        {isAuthenticated ? <ProjectBugReports /> : <LoginPage />}
-      </Route>
-      <Route path="/standup">
-        {isAuthenticated ? <DailyStandup /> : <LoginPage />}
-      </Route>
-
-      {/* Catch all - always show login for unauthenticated users */}
-      <Route>
-        {isAuthenticated ? <NotFound /> : <LoginPage />}
-      </Route>
+      {/* All routes accessible (login bypass active) */}
+      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/projects" component={Projects} />
+      <Route path="/projects/:id" component={ProjectDetails} />
+      <Route path="/teams" component={Teams} />
+      <Route path="/teams/:id" component={TeamDetails} />
+      <Route path="/timeline" component={Timeline} />
+      <Route path="/calendar" component={Timeline} />
+      <Route path="/reports" component={Reports} />
+      <Route path="/report-bug" component={ReportBug} />
+      <Route path="/project-bug-reports" component={ProjectBugReports} />
+      <Route path="/standup" component={DailyStandup} />
+      <Route component={NotFound} />
     </Switch>
   );
 }

@@ -23,8 +23,7 @@ export function useAuth() {
         return result;
       } catch (error: any) {
         console.log('[useAuth] Auth error:', error);
-        // For 401/403 errors, return null instead of throwing
-        if (error?.status === 401 || error?.status === 403) {
+        if (error?.status === 401 || error?.status === 403 || error?.status === 404) {
           console.log('[useAuth] User not authenticated, returning null');
           return null;
         }
