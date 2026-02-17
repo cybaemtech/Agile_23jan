@@ -1,0 +1,160 @@
+Here's a comprehensive prompt you can paste directly into Replit Agent:
+
+---
+
+**"I want to add a Strategic Swimlane Roadmap feature to my existing project management application. Below is the full specification.**
+
+**FEATURE NAME: Strategic Thought Screen — Multi-Template Portfolio Roadmap**
+
+---
+
+**OVERVIEW**
+Build a standalone module/page called `StrategicRoadmap` that can be embedded into the existing app. It allows CEOs, CTOs, and Principal PMs to create multiple roadmap templates, each with custom streams/services, projects, and action points — visualized as a Gantt-style swimlane chart.
+
+---
+
+**ARCHITECTURE: 3 layers**
+
+**Layer 1 — Template Gallery (index/home view)**
+- Grid of cards, one per saved template
+- Each card shows: template name, description, color bar, stream tags, project count
+- Actions per card: Open, Duplicate, Delete
+- A "New Template" card (dashed border) opens a creation modal
+- On open → navigate to Layer 2
+
+**Layer 2 — New Template Modal**
+- Fields: Template Name (required), Description, Streams/Services list (dynamic add/remove, minimum 1)
+- On confirm → create template and navigate to Layer 3
+
+**Layer 3 — Roadmap Editor (split-panel view)**
+- Left panel (fixed width ~320px, scrollable): form + stream manager + project list accordion
+- Right panel (flex, scrollable horizontally): Gantt swimlane chart
+
+---
+
+**DATA SCHEMA**
+
+```
+Template {
+  id: number | string
+  name: string
+  description: string
+  streams: string[]         // ordered list of stream/service names
+  projects: Project[]
+}
+
+Project {
+  id: number | string
+  name: string
+  startDate: string         // format: 'YYYY-MM'
+  endDate: string           // format: 'YYYY-MM'
+  stream: string            // must match a value in Template.streams
+  actionPoints: string[]    // bullet list of tasks
+}
+```
+
+---
+
+**LEFT PANEL — behaviour**
+
+**Stream Manager (collapsible section)**
+- List all streams with color dot indicator
+- Inline "Add New" input (confirm on Enter or button click)
+- Delete stream on hover (with confirmation if it has projects)
+- Auto-assign colors from a 15-color palette by index
+
+**Project Form — dual mode**
+- ADD mode (default): empty fields, "Add Project" button (blue)
+- EDIT mode (when a project is selected): fields pre-populated, "Update Project" button (green) + "Cancel" button
+- Fields: Project Name, Start Date (month picker), End Date (month picker), Stream (dropdown), Action Points (dynamic list, add/remove rows)
+- Blue info banner visible in EDIT mode with cancel link
+
+**Projects Accordion**
+- Header shows "Projects (n)" with chevron toggle
+- Each item: project name, date range, stream label (colored), action point count
+- Click item → enters EDIT mode (Mirror Effect)
+- Delete button (X) per item with stopPropagation
+
+---
+
+**RIGHT PANEL — Gantt chart**
+
+**Timeline header**
+- Months auto-calculated from min(startDate) to max(endDate) across all projects
+- Each column = 1 month, labeled "MMM YY"
+
+**Swimlanes**
+- One horizontal swimlane per stream (skip if no projects in that stream)
+- Stream label on the left (colored, bold)
+
+**Stacking logic (within each swimlane)**
+- Sort projects by startDate
+- Use a lane-finding algorithm: place each project in the first available vertical lane where no overlap exists
+- Projects in different streams do NOT affect each other's lane index
+
+**Project bars**
+- Position and width calculated as % of total timeline
+- Color = stream color
+- Text truncated with ellipsis if bar is too short
+
+**Interactions**
+1. HOVER → show tooltip (do NOT remove on click):
+   - Full project name (bold)
+   - Date range
+   - Divider line
+   - Action points as bullet list
+   - Stream-colored CheckCircle icon
+2. CLICK → Mirror Effect:
+   - Sets selectedProject state
+   - Left panel populates with that project's data (EDIT mode)
+   - Selected bar gets: ring border, scale(1.02), full opacity
+   - Other bars slightly dimmed (opacity 0.9)
+
+---
+
+**STATE MANAGEMENT**
+- `templates: Template[]` — top-level, persisted (localStorage or your existing DB/state layer)
+- `activeTemplateId: number | null` — which template is open
+- Per-editor: `selectedProject`, `hoveredProject`, `formData`, `isProjectsExpanded`, `showStreamInput`
+- On every project/stream mutation → call save/update handler to persist
+
+---
+
+**NAVIGATION FLOW**
+```
+Gallery → [click Open]    → Roadmap Editor
+Gallery → [click + New]   → Modal → Roadmap Editor
+Editor  → [click ← Back] → Gallery
+```
+
+---
+
+**VISUAL / STYLE REQUIREMENTS**
+- Match existing app's design system (fonts, border radius, button styles)
+- Color palette for streams (15 colors, cycle by index):
+  `['#10b981','#3b82f6','#8b5cf6','#f59e0b','#ec4899','#06b6d4','#ef4444','#84cc16','#f97316','#a855f7','#14b8a6','#f43f5e','#22c55e','#eab308','#6366f1']`
+- Gantt bars: rounded, white text, shadow-sm, hover shadow-lg
+- Tooltip: white bg, border, rounded-lg, shadow-xl, 256px wide, z-index 50
+- Selected bar: ring-4, scale(1.02)
+- Stream labels: bold, left-aligned, 160px fixed column
+
+---
+
+**SEED DATA (optional, for testing)**
+Include 3 default templates:
+1. **Product Roadmap** — streams: Growth, Retention, Platform, Infrastructure, Experience — 10 sample projects spanning 2025–2026
+2. **Digital Marketing Plan** — streams: SEO, Paid Ads, Social Media, Email Marketing, Content — 8 sample projects spanning 2025–2026
+3. **Sales & CRM** — streams: Lead Generation, Outreach, Pipeline, Closing, Account Management — 7 sample projects spanning 2025
+
+---
+
+**INTEGRATION NOTES FOR REPLIT**
+- Build as a self-contained React component/module exportable as `<StrategicRoadmap />`
+- Accept optional props: `initialTemplates`, `onSave(templates)` for integration with existing data layer
+- No external charting libraries needed — pure CSS/flexbox Gantt rendering
+- Use only: React hooks, Tailwind CSS (or inline styles), lucide-react icons
+- Ensure the module does NOT conflict with existing routes — mount it at `/roadmap` or as a tab in the existing nav"**
+
+---
+
+This prompt gives Replit Agent everything it needs — the data schema, component architecture, interaction logic, visual specs, and integration boundaries — so it can build it cleanly into your existing app without ambiguity.

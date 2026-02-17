@@ -48,6 +48,7 @@ A full-stack agile project management application built with React (Vite) fronte
 - Database schema managed via Drizzle with `drizzle-kit push`
 
 ## Recent Changes
+- Added Strategic Swimlane Roadmap feature (`/roadmap` route) with template gallery, Gantt-style editor, and localStorage persistence
 - Configured for Replit environment (removed external proxy, fixed base path)
 - Set up PostgreSQL database
 - Fixed missing `canDeleteWorkItem` import in routes

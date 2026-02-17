@@ -16,6 +16,7 @@ import ProjectBugReports from "@/pages/project-bug-reports";
 import DailyStandup from "@/pages/standup";
 import LoginPage from "@/pages/login";
 import Register from "@/pages/register";
+import StrategicRoadmap from "@/pages/strategic-roadmap";
 import { useAuth } from "./hooks/useAuth";
 import { useSessionHeartbeat } from "./hooks/useSessionHeartbeat";
 import { useSessionWarning } from "./hooks/useSessionWarning";
@@ -100,6 +101,9 @@ function Routes() {
       </Route>
       <Route path="/standup">
         {isAuthenticated ? <DailyStandup /> : <LoginPage />}
+      </Route>
+      <Route path="/roadmap">
+        {isAuthenticated ? <StrategicRoadmap /> : <LoginPage />}
       </Route>
 
       {/* Catch all - always show login for unauthenticated users */}

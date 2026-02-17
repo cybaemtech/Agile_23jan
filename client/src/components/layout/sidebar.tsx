@@ -13,6 +13,7 @@ import {
   ListTodo,
   ChevronsLeft,
   ChevronsRight,
+  Map,
 } from "lucide-react";
 import { Team, Project, User } from "@shared/schema";
 import CybaemLogo from "@/assets/cybaem-logo.png";
@@ -33,6 +34,7 @@ const menuItems = [
   { href: "/timeline", icon: Calendar, label: "Timeline", isActive: (loc: string) => loc === "/timeline" || loc === "/calendar" },
   { href: "/reports", icon: BarChart, label: "Reports", isActive: (loc: string) => loc === "/reports" },
   { href: "/project-bug-reports", icon: Bug, label: "Project Bug Reviews", isActive: (loc: string) => loc === "/project-bug-reports" },
+  { href: "/roadmap", icon: Map, label: "Strategic Roadmap", isActive: (loc: string) => loc === "/roadmap" },
 ];
 
 // Initialize sidebar state from localStorage
